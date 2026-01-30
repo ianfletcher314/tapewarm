@@ -47,7 +47,7 @@
  #define JucePlugin_Desc                   "Analog tape emulation plugin"
 #endif
 #ifndef  JucePlugin_Manufacturer
- #define JucePlugin_Manufacturer           "Compstortion"
+ #define JucePlugin_Manufacturer           "Fletcher"
 #endif
 #ifndef  JucePlugin_ManufacturerWebsite
  #define JucePlugin_ManufacturerWebsite    "https://github.com/ianfletcher314/tapewarm"
@@ -137,7 +137,7 @@
  #define JucePlugin_IAASubType             JucePlugin_PluginCode
 #endif
 #ifndef  JucePlugin_IAAName
- #define JucePlugin_IAAName                "Compstortion: TapeWarm"
+ #define JucePlugin_IAAName                "Fletcher: TapeWarm"
 #endif
 #ifndef  JucePlugin_VSTNumMidiInputs
  #define JucePlugin_VSTNumMidiInputs       16

@@ -512,22 +512,25 @@ void TapeWarmAudioProcessorEditor::resized()
     outputLabel.setBounds(startX + knobSpacing * 3, knobY2, knobSize, 14);
     outputKnob.setBounds(startX + knobSpacing * 3, knobY2 + 14, knobSize, knobSize);
 
-    // Secondary controls - bottom row
-    int sliderY = 410;
-    int sliderWidth = 100;
+    // Secondary controls - bottom row (2x2 layout for better spacing)
+    int sliderY1 = 405;
+    int sliderY2 = 435;
+    int sliderWidth = 90;
     int sliderHeight = 20;
-    int labelWidth = 60;
-    int sliderSpacing = 140;
+    int labelWidth = 55;
+    int columnSpacing = 280;
 
-    bumpFreqLabel.setBounds(30, sliderY, labelWidth, 16);
-    bumpFreqSlider.setBounds(30 + labelWidth, sliderY, sliderWidth, sliderHeight);
+    // Left column
+    bumpFreqLabel.setBounds(30, sliderY1, labelWidth, 16);
+    bumpFreqSlider.setBounds(30 + labelWidth, sliderY1, sliderWidth, sliderHeight);
 
-    ageLabel.setBounds(30 + sliderSpacing, sliderY, labelWidth, 16);
-    ageSlider.setBounds(30 + sliderSpacing + labelWidth, sliderY, sliderWidth, sliderHeight);
+    ageLabel.setBounds(30, sliderY2, labelWidth, 16);
+    ageSlider.setBounds(30 + labelWidth, sliderY2, sliderWidth, sliderHeight);
 
-    mixLabel.setBounds(30 + sliderSpacing * 2, sliderY, labelWidth, 16);
-    mixSlider.setBounds(30 + sliderSpacing * 2 + labelWidth, sliderY, sliderWidth, sliderHeight);
+    // Right column
+    mixLabel.setBounds(30 + columnSpacing, sliderY1, labelWidth, 16);
+    mixSlider.setBounds(30 + columnSpacing + labelWidth, sliderY1, sliderWidth, sliderHeight);
 
-    biasLabel.setBounds(30 + sliderSpacing * 3, sliderY, labelWidth, 16);
-    biasSlider.setBounds(30 + sliderSpacing * 3 + labelWidth, sliderY, sliderWidth, sliderHeight);
+    biasLabel.setBounds(30 + columnSpacing, sliderY2, labelWidth, 16);
+    biasSlider.setBounds(30 + columnSpacing + labelWidth, sliderY2, sliderWidth, sliderHeight);
 }

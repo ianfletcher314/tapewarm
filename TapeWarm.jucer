@@ -5,7 +5,7 @@
               companyCopyright="2025" companyWebsite="https://github.com/ianfletcher314/tapewarm"
               pluginFormats="buildAU,buildVST3" pluginCharacteristicsValue=""
               pluginName="TapeWarm" pluginDesc="Analog tape emulation plugin"
-              pluginManufacturer="Compstortion" pluginManufacturerCode="Cmps"
+              pluginManufacturer="Fletcher" pluginManufacturerCode="Cmps"
               pluginCode="Tpwm" pluginVST3Category="Fx" pluginAUMainType="'aufx'">
   <MAINGROUP id="MAINGRP" name="TapeWarm">
     <GROUP id="SOURCE" name="Source">
