@@ -56,7 +56,7 @@
  #define JucePlugin_ManufacturerEmail      ""
 #endif
 #ifndef  JucePlugin_ManufacturerCode
- #define JucePlugin_ManufacturerCode       0x436d7073
+ #define JucePlugin_ManufacturerCode       0x466c6574
 #endif
 #ifndef  JucePlugin_PluginCode
  #define JucePlugin_PluginCode             0x5470776d
@@ -110,10 +110,10 @@
  #define JucePlugin_AUManufacturerCode     JucePlugin_ManufacturerCode
 #endif
 #ifndef  JucePlugin_CFBundleIdentifier
- #define JucePlugin_CFBundleIdentifier     com.Compstortion.TapeWarm
+ #define JucePlugin_CFBundleIdentifier     com.Fletcher.TapeWarm
 #endif
 #ifndef  JucePlugin_AAXIdentifier
- #define JucePlugin_AAXIdentifier          com.Compstortion.TapeWarm
+ #define JucePlugin_AAXIdentifier          com.Fletcher.TapeWarm
 #endif
 #ifndef  JucePlugin_AAXManufacturerCode
  #define JucePlugin_AAXManufacturerCode    JucePlugin_ManufacturerCode
@@ -152,10 +152,10 @@
  #define JucePlugin_ARATransformationFlags  0
 #endif
 #ifndef  JucePlugin_ARAFactoryID
- #define JucePlugin_ARAFactoryID           "com.Compstortion.TapeWarm.factory"
+ #define JucePlugin_ARAFactoryID           "com.Fletcher.TapeWarm.factory"
 #endif
 #ifndef  JucePlugin_ARADocumentArchiveID
- #define JucePlugin_ARADocumentArchiveID   "com.Compstortion.TapeWarm.aradocumentarchive.1.0.0"
+ #define JucePlugin_ARADocumentArchiveID   "com.Fletcher.TapeWarm.aradocumentarchive.1.0.0"
 #endif
 #ifndef  JucePlugin_ARACompatibleArchiveIDs
  #define JucePlugin_ARACompatibleArchiveIDs  ""

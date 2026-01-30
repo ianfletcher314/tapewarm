@@ -433,7 +433,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1340;
-				ORGANIZATIONNAME = "Compstortion";
+				ORGANIZATIONNAME = "Fletcher";
 				TargetAttributes = {
 					3BAE066133046FE9052B12FB = {
 						SystemCapabilities = {
@@ -767,7 +767,7 @@
 					"JucePlugin_Manufacturer=\\\"Fletcher\\\"",
 					"JucePlugin_ManufacturerWebsite=\\\"https://github.com/ianfletcher314/tapewarm\\\"",
 					"JucePlugin_ManufacturerEmail=\\\"\\\"",
-					"JucePlugin_ManufacturerCode=0x436d7073",
+					"JucePlugin_ManufacturerCode=0x466c6574",
 					"JucePlugin_PluginCode=0x5470776d",
 					"JucePlugin_IsSynth=0",
 					"JucePlugin_WantsMidiInput=0",
@@ -785,8 +785,8 @@
 					"JucePlugin_AUExportPrefix=TapeWarmAU",
 					"JucePlugin_AUExportPrefixQuoted=\\\"TapeWarmAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_CFBundleIdentifier=com.Compstortion.TapeWarm",
-					"JucePlugin_AAXIdentifier=com.Compstortion.TapeWarm",
+					"JucePlugin_CFBundleIdentifier=com.Fletcher.TapeWarm",
+					"JucePlugin_AAXIdentifier=com.Fletcher.TapeWarm",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
 					"JucePlugin_AAXCategory=0",
@@ -799,8 +799,8 @@
 					"JucePlugin_VSTNumMidiOutputs=16",
 					"JucePlugin_ARAContentTypes=0",
 					"JucePlugin_ARATransformationFlags=0",
-					"JucePlugin_ARAFactoryID=\\\"com.Compstortion.TapeWarm.factory\\\"",
-					"JucePlugin_ARADocumentArchiveID=\\\"com.Compstortion.TapeWarm.aradocumentarchive.1.0.0\\\"",
+					"JucePlugin_ARAFactoryID=\\\"com.Fletcher.TapeWarm.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Fletcher.TapeWarm.aradocumentarchive.1.0.0\\\"",
 					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
@@ -821,7 +821,7 @@
 				MTL_HEADER_SEARCH_PATHS = "/Users/ianfletcher/JUCE/modules/juce_audio_processors_headless/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode /Users/ianfletcher/JUCE/modules /Users/ianfletcher/JUCE/modules/juce_audio_plugin_client/AU";
 				OTHER_CFLAGS = "-Wall -Wextra";
 				OTHER_CPLUSPLUSFLAGS = "-Wall -Wextra";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Compstortion.TapeWarm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Fletcher.TapeWarm;
 				PRODUCT_NAME = "juce_vst3_helper";
 				USE_HEADERMAP = NO;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
@@ -876,7 +876,7 @@
 					"JucePlugin_Manufacturer=\\\"Fletcher\\\"",
 					"JucePlugin_ManufacturerWebsite=\\\"https://github.com/ianfletcher314/tapewarm\\\"",
 					"JucePlugin_ManufacturerEmail=\\\"\\\"",
-					"JucePlugin_ManufacturerCode=0x436d7073",
+					"JucePlugin_ManufacturerCode=0x466c6574",
 					"JucePlugin_PluginCode=0x5470776d",
 					"JucePlugin_IsSynth=0",
 					"JucePlugin_WantsMidiInput=0",
@@ -894,8 +894,8 @@
 					"JucePlugin_AUExportPrefix=TapeWarmAU",
 					"JucePlugin_AUExportPrefixQuoted=\\\"TapeWarmAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_CFBundleIdentifier=com.Compstortion.TapeWarm",
-					"JucePlugin_AAXIdentifier=com.Compstortion.TapeWarm",
+					"JucePlugin_CFBundleIdentifier=com.Fletcher.TapeWarm",
+					"JucePlugin_AAXIdentifier=com.Fletcher.TapeWarm",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
 					"JucePlugin_AAXCategory=0",
@@ -908,8 +908,8 @@
 					"JucePlugin_VSTNumMidiOutputs=16",
 					"JucePlugin_ARAContentTypes=0",
 					"JucePlugin_ARATransformationFlags=0",
-					"JucePlugin_ARAFactoryID=\\\"com.Compstortion.TapeWarm.factory\\\"",
-					"JucePlugin_ARADocumentArchiveID=\\\"com.Compstortion.TapeWarm.aradocumentarchive.1.0.0\\\"",
+					"JucePlugin_ARAFactoryID=\\\"com.Fletcher.TapeWarm.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Fletcher.TapeWarm.aradocumentarchive.1.0.0\\\"",
 					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
@@ -936,7 +936,7 @@
 				OTHER_CPLUSPLUSFLAGS = "-Wall -Wextra";
 				OTHER_LDFLAGS = "-bundle -lTapeWarm";
 				OTHER_REZFLAGS = "-d ppc_$ppc -d i386_$i386 -d ppc64_$ppc64 -d x86_64_$x86_64 -d arm64_$arm64 -I /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers -I \"$(DEVELOPER_DIR)/Extras/CoreAudio/AudioUnits/AUPublic/AUBase\" -I \"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/AudioUnit.framework/Headers\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Compstortion.TapeWarm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Fletcher.TapeWarm;
 				PRODUCT_NAME = "TapeWarm";
 				USE_HEADERMAP = NO;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
@@ -992,7 +992,7 @@
 					"JucePlugin_Manufacturer=\\\"Fletcher\\\"",
 					"JucePlugin_ManufacturerWebsite=\\\"https://github.com/ianfletcher314/tapewarm\\\"",
 					"JucePlugin_ManufacturerEmail=\\\"\\\"",
-					"JucePlugin_ManufacturerCode=0x436d7073",
+					"JucePlugin_ManufacturerCode=0x466c6574",
 					"JucePlugin_PluginCode=0x5470776d",
 					"JucePlugin_IsSynth=0",
 					"JucePlugin_WantsMidiInput=0",
@@ -1010,8 +1010,8 @@
 					"JucePlugin_AUExportPrefix=TapeWarmAU",
 					"JucePlugin_AUExportPrefixQuoted=\\\"TapeWarmAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_CFBundleIdentifier=com.Compstortion.TapeWarm",
-					"JucePlugin_AAXIdentifier=com.Compstortion.TapeWarm",
+					"JucePlugin_CFBundleIdentifier=com.Fletcher.TapeWarm",
+					"JucePlugin_AAXIdentifier=com.Fletcher.TapeWarm",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
 					"JucePlugin_AAXCategory=0",
@@ -1024,8 +1024,8 @@
 					"JucePlugin_VSTNumMidiOutputs=16",
 					"JucePlugin_ARAContentTypes=0",
 					"JucePlugin_ARATransformationFlags=0",
-					"JucePlugin_ARAFactoryID=\\\"com.Compstortion.TapeWarm.factory\\\"",
-					"JucePlugin_ARADocumentArchiveID=\\\"com.Compstortion.TapeWarm.aradocumentarchive.1.0.0\\\"",
+					"JucePlugin_ARAFactoryID=\\\"com.Fletcher.TapeWarm.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Fletcher.TapeWarm.aradocumentarchive.1.0.0\\\"",
 					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
@@ -1047,7 +1047,7 @@
 				MTL_HEADER_SEARCH_PATHS = "/Users/ianfletcher/JUCE/modules/juce_audio_processors_headless/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode /Users/ianfletcher/JUCE/modules /Users/ianfletcher/JUCE/modules/juce_audio_plugin_client/AU";
 				OTHER_CFLAGS = "-Wall -Wextra";
 				OTHER_CPLUSPLUSFLAGS = "-Wall -Wextra";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Compstortion.TapeWarm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Fletcher.TapeWarm;
 				PRODUCT_NAME = "juce_vst3_helper";
 				USE_HEADERMAP = NO;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
@@ -1151,7 +1151,7 @@
 					"JucePlugin_Manufacturer=\\\"Fletcher\\\"",
 					"JucePlugin_ManufacturerWebsite=\\\"https://github.com/ianfletcher314/tapewarm\\\"",
 					"JucePlugin_ManufacturerEmail=\\\"\\\"",
-					"JucePlugin_ManufacturerCode=0x436d7073",
+					"JucePlugin_ManufacturerCode=0x466c6574",
 					"JucePlugin_PluginCode=0x5470776d",
 					"JucePlugin_IsSynth=0",
 					"JucePlugin_WantsMidiInput=0",
@@ -1169,8 +1169,8 @@
 					"JucePlugin_AUExportPrefix=TapeWarmAU",
 					"JucePlugin_AUExportPrefixQuoted=\\\"TapeWarmAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_CFBundleIdentifier=com.Compstortion.TapeWarm",
-					"JucePlugin_AAXIdentifier=com.Compstortion.TapeWarm",
+					"JucePlugin_CFBundleIdentifier=com.Fletcher.TapeWarm",
+					"JucePlugin_AAXIdentifier=com.Fletcher.TapeWarm",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
 					"JucePlugin_AAXCategory=0",
@@ -1183,8 +1183,8 @@
 					"JucePlugin_VSTNumMidiOutputs=16",
 					"JucePlugin_ARAContentTypes=0",
 					"JucePlugin_ARATransformationFlags=0",
-					"JucePlugin_ARAFactoryID=\\\"com.Compstortion.TapeWarm.factory\\\"",
-					"JucePlugin_ARADocumentArchiveID=\\\"com.Compstortion.TapeWarm.aradocumentarchive.1.0.0\\\"",
+					"JucePlugin_ARAFactoryID=\\\"com.Fletcher.TapeWarm.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Fletcher.TapeWarm.aradocumentarchive.1.0.0\\\"",
 					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
@@ -1210,7 +1210,7 @@
 				OTHER_CFLAGS = "-Wall -Wextra";
 				OTHER_CPLUSPLUSFLAGS = "-Wall -Wextra";
 				OTHER_LDFLAGS = "-bundle -lTapeWarm";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Compstortion.TapeWarm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Fletcher.TapeWarm;
 				PRODUCT_NAME = "TapeWarm";
 				USE_HEADERMAP = NO;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
@@ -1314,7 +1314,7 @@
 					"JucePlugin_Manufacturer=\\\"Fletcher\\\"",
 					"JucePlugin_ManufacturerWebsite=\\\"https://github.com/ianfletcher314/tapewarm\\\"",
 					"JucePlugin_ManufacturerEmail=\\\"\\\"",
-					"JucePlugin_ManufacturerCode=0x436d7073",
+					"JucePlugin_ManufacturerCode=0x466c6574",
 					"JucePlugin_PluginCode=0x5470776d",
 					"JucePlugin_IsSynth=0",
 					"JucePlugin_WantsMidiInput=0",
@@ -1332,8 +1332,8 @@
 					"JucePlugin_AUExportPrefix=TapeWarmAU",
 					"JucePlugin_AUExportPrefixQuoted=\\\"TapeWarmAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_CFBundleIdentifier=com.Compstortion.TapeWarm",
-					"JucePlugin_AAXIdentifier=com.Compstortion.TapeWarm",
+					"JucePlugin_CFBundleIdentifier=com.Fletcher.TapeWarm",
+					"JucePlugin_AAXIdentifier=com.Fletcher.TapeWarm",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
 					"JucePlugin_AAXCategory=0",
@@ -1346,8 +1346,8 @@
 					"JucePlugin_VSTNumMidiOutputs=16",
 					"JucePlugin_ARAContentTypes=0",
 					"JucePlugin_ARATransformationFlags=0",
-					"JucePlugin_ARAFactoryID=\\\"com.Compstortion.TapeWarm.factory\\\"",
-					"JucePlugin_ARADocumentArchiveID=\\\"com.Compstortion.TapeWarm.aradocumentarchive.1.0.0\\\"",
+					"JucePlugin_ARAFactoryID=\\\"com.Fletcher.TapeWarm.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Fletcher.TapeWarm.aradocumentarchive.1.0.0\\\"",
 					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
@@ -1372,7 +1372,7 @@
 				OTHER_CFLAGS = "-Wall -Wextra";
 				OTHER_CPLUSPLUSFLAGS = "-Wall -Wextra";
 				OTHER_LDFLAGS = "-bundle -lTapeWarm";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Compstortion.TapeWarm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Fletcher.TapeWarm;
 				PRODUCT_NAME = "TapeWarm";
 				USE_HEADERMAP = NO;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
@@ -1428,7 +1428,7 @@
 					"JucePlugin_Manufacturer=\\\"Fletcher\\\"",
 					"JucePlugin_ManufacturerWebsite=\\\"https://github.com/ianfletcher314/tapewarm\\\"",
 					"JucePlugin_ManufacturerEmail=\\\"\\\"",
-					"JucePlugin_ManufacturerCode=0x436d7073",
+					"JucePlugin_ManufacturerCode=0x466c6574",
 					"JucePlugin_PluginCode=0x5470776d",
 					"JucePlugin_IsSynth=0",
 					"JucePlugin_WantsMidiInput=0",
@@ -1446,8 +1446,8 @@
 					"JucePlugin_AUExportPrefix=TapeWarmAU",
 					"JucePlugin_AUExportPrefixQuoted=\\\"TapeWarmAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_CFBundleIdentifier=com.Compstortion.TapeWarm",
-					"JucePlugin_AAXIdentifier=com.Compstortion.TapeWarm",
+					"JucePlugin_CFBundleIdentifier=com.Fletcher.TapeWarm",
+					"JucePlugin_AAXIdentifier=com.Fletcher.TapeWarm",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
 					"JucePlugin_AAXCategory=0",
@@ -1460,8 +1460,8 @@
 					"JucePlugin_VSTNumMidiOutputs=16",
 					"JucePlugin_ARAContentTypes=0",
 					"JucePlugin_ARATransformationFlags=0",
-					"JucePlugin_ARAFactoryID=\\\"com.Compstortion.TapeWarm.factory\\\"",
-					"JucePlugin_ARADocumentArchiveID=\\\"com.Compstortion.TapeWarm.aradocumentarchive.1.0.0\\\"",
+					"JucePlugin_ARAFactoryID=\\\"com.Fletcher.TapeWarm.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Fletcher.TapeWarm.aradocumentarchive.1.0.0\\\"",
 					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
@@ -1482,7 +1482,7 @@
 				MTL_HEADER_SEARCH_PATHS = "/Users/ianfletcher/JUCE/modules/juce_audio_processors_headless/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode /Users/ianfletcher/JUCE/modules /Users/ianfletcher/JUCE/modules/juce_audio_plugin_client/AU";
 				OTHER_CFLAGS = "-Wall -Wextra";
 				OTHER_CPLUSPLUSFLAGS = "-Wall -Wextra";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Compstortion.TapeWarm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Fletcher.TapeWarm;
 				PRODUCT_NAME = "TapeWarm";
 				SKIP_INSTALL = YES;
 				USE_HEADERMAP = NO;
@@ -1538,7 +1538,7 @@
 					"JucePlugin_Manufacturer=\\\"Fletcher\\\"",
 					"JucePlugin_ManufacturerWebsite=\\\"https://github.com/ianfletcher314/tapewarm\\\"",
 					"JucePlugin_ManufacturerEmail=\\\"\\\"",
-					"JucePlugin_ManufacturerCode=0x436d7073",
+					"JucePlugin_ManufacturerCode=0x466c6574",
 					"JucePlugin_PluginCode=0x5470776d",
 					"JucePlugin_IsSynth=0",
 					"JucePlugin_WantsMidiInput=0",
@@ -1556,8 +1556,8 @@
 					"JucePlugin_AUExportPrefix=TapeWarmAU",
 					"JucePlugin_AUExportPrefixQuoted=\\\"TapeWarmAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_CFBundleIdentifier=com.Compstortion.TapeWarm",
-					"JucePlugin_AAXIdentifier=com.Compstortion.TapeWarm",
+					"JucePlugin_CFBundleIdentifier=com.Fletcher.TapeWarm",
+					"JucePlugin_AAXIdentifier=com.Fletcher.TapeWarm",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
 					"JucePlugin_AAXCategory=0",
@@ -1570,8 +1570,8 @@
 					"JucePlugin_VSTNumMidiOutputs=16",
 					"JucePlugin_ARAContentTypes=0",
 					"JucePlugin_ARATransformationFlags=0",
-					"JucePlugin_ARAFactoryID=\\\"com.Compstortion.TapeWarm.factory\\\"",
-					"JucePlugin_ARADocumentArchiveID=\\\"com.Compstortion.TapeWarm.aradocumentarchive.1.0.0\\\"",
+					"JucePlugin_ARAFactoryID=\\\"com.Fletcher.TapeWarm.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Fletcher.TapeWarm.aradocumentarchive.1.0.0\\\"",
 					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
@@ -1593,7 +1593,7 @@
 				MTL_HEADER_SEARCH_PATHS = "/Users/ianfletcher/JUCE/modules/juce_audio_processors_headless/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode /Users/ianfletcher/JUCE/modules /Users/ianfletcher/JUCE/modules/juce_audio_plugin_client/AU";
 				OTHER_CFLAGS = "-Wall -Wextra";
 				OTHER_CPLUSPLUSFLAGS = "-Wall -Wextra";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Compstortion.TapeWarm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Fletcher.TapeWarm;
 				PRODUCT_NAME = "TapeWarm";
 				SKIP_INSTALL = YES;
 				USE_HEADERMAP = NO;
@@ -1657,7 +1657,7 @@
 					"JucePlugin_Manufacturer=\\\"Fletcher\\\"",
 					"JucePlugin_ManufacturerWebsite=\\\"https://github.com/ianfletcher314/tapewarm\\\"",
 					"JucePlugin_ManufacturerEmail=\\\"\\\"",
-					"JucePlugin_ManufacturerCode=0x436d7073",
+					"JucePlugin_ManufacturerCode=0x466c6574",
 					"JucePlugin_PluginCode=0x5470776d",
 					"JucePlugin_IsSynth=0",
 					"JucePlugin_WantsMidiInput=0",
@@ -1675,8 +1675,8 @@
 					"JucePlugin_AUExportPrefix=TapeWarmAU",
 					"JucePlugin_AUExportPrefixQuoted=\\\"TapeWarmAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_CFBundleIdentifier=com.Compstortion.TapeWarm",
-					"JucePlugin_AAXIdentifier=com.Compstortion.TapeWarm",
+					"JucePlugin_CFBundleIdentifier=com.Fletcher.TapeWarm",
+					"JucePlugin_AAXIdentifier=com.Fletcher.TapeWarm",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
 					"JucePlugin_AAXCategory=0",
@@ -1689,8 +1689,8 @@
 					"JucePlugin_VSTNumMidiOutputs=16",
 					"JucePlugin_ARAContentTypes=0",
 					"JucePlugin_ARATransformationFlags=0",
-					"JucePlugin_ARAFactoryID=\\\"com.Compstortion.TapeWarm.factory\\\"",
-					"JucePlugin_ARADocumentArchiveID=\\\"com.Compstortion.TapeWarm.aradocumentarchive.1.0.0\\\"",
+					"JucePlugin_ARAFactoryID=\\\"com.Fletcher.TapeWarm.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Fletcher.TapeWarm.aradocumentarchive.1.0.0\\\"",
 					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
@@ -1716,7 +1716,7 @@
 				OTHER_CPLUSPLUSFLAGS = "-Wall -Wextra";
 				OTHER_LDFLAGS = "-bundle -lTapeWarm";
 				OTHER_REZFLAGS = "-d ppc_$ppc -d i386_$i386 -d ppc64_$ppc64 -d x86_64_$x86_64 -d arm64_$arm64 -I /System/Library/Frameworks/CoreServices.framework/Frameworks/CarbonCore.framework/Versions/A/Headers -I \"$(DEVELOPER_DIR)/Extras/CoreAudio/AudioUnits/AUPublic/AUBase\" -I \"$(DEVELOPER_DIR)/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/AudioUnit.framework/Headers\"";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Compstortion.TapeWarm;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Fletcher.TapeWarm;
 				PRODUCT_NAME = "TapeWarm";
 				USE_HEADERMAP = NO;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
