@@ -1,22 +1,75 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
-// Vintage tape machine color palette
+// Muted metallic color palette (matching PDLBRD style)
 namespace TapeColors {
-    const juce::Colour background   = juce::Colour(0xff2a2520);  // Dark warm brown
-    const juce::Colour faceplate    = juce::Colour(0xff3d3630);  // Lighter brown
-    const juce::Colour cream        = juce::Colour(0xfff5f0e6);  // Vintage cream
+    const juce::Colour background   = juce::Colour(0xff1a1a1a);  // Dark background
+    const juce::Colour faceplate    = juce::Colour(0xff3a3535);  // Muted brownish metal
+    const juce::Colour cream        = juce::Colour(0xffdddddd);  // Light gray text
     const juce::Colour gold         = juce::Colour(0xffc9a227);  // Gold accents
-    const juce::Colour reelHub      = juce::Colour(0xff8b7355);  // Reel hub brown
+    const juce::Colour reelHub      = juce::Colour(0xff6a6055);  // Reel hub brown
     const juce::Colour reelTape     = juce::Colour(0xff1a1510);  // Tape color (dark)
-    const juce::Colour vuGreen      = juce::Colour(0xff4a7c59);  // VU meter green
-    const juce::Colour vuYellow     = juce::Colour(0xffc9a227);  // VU meter yellow
-    const juce::Colour vuRed        = juce::Colour(0xffc44536);  // VU meter red
+    const juce::Colour vuGreen      = juce::Colour(0xff22c55e);  // VU meter green (matching PDLBRD)
+    const juce::Colour vuYellow     = juce::Colour(0xffeab308);  // VU meter yellow
+    const juce::Colour vuRed        = juce::Colour(0xffef4444);  // VU meter red
     const juce::Colour knobBody     = juce::Colour(0xff4a4440);  // Knob body
-    const juce::Colour knobPointer  = juce::Colour(0xfff5f0e6);  // Knob pointer
-    const juce::Colour labelText    = juce::Colour(0xfff5f0e6);  // Label text
-    const juce::Colour metalLight   = juce::Colour(0xff606060);  // Metal highlight
-    const juce::Colour metalDark    = juce::Colour(0xff252525);  // Metal shadow
+    const juce::Colour knobPointer  = juce::Colour(0xffeeeeee);  // Knob pointer
+    const juce::Colour labelText    = juce::Colour(0xffeeeeee);  // Label text
+    const juce::Colour metalLight   = juce::Colour(0xff505050);  // Metal highlight
+    const juce::Colour metalDark    = juce::Colour(0xff202020);  // Metal shadow
+    const juce::Colour screw        = juce::Colour(0xff505050);  // Screw color
+}
+
+//==============================================================================
+// Helper functions for drawing components (matching PDLBRD style)
+//==============================================================================
+static void drawScrew(juce::Graphics& g, float x, float y, float size)
+{
+    // Outer ring
+    g.setColour(TapeColors::screw.darker(0.3f));
+    g.fillEllipse(x - size/2, y - size/2, size, size);
+
+    // Inner hex pattern (simplified as star)
+    g.setColour(TapeColors::screw.brighter(0.2f));
+    g.fillEllipse(x - size/3, y - size/3, size * 0.66f, size * 0.66f);
+
+    // Hex slot
+    juce::Path hex;
+    float r = size * 0.22f;
+    for (int i = 0; i < 6; ++i)
+    {
+        float angle = i * juce::MathConstants<float>::pi / 3.0f - juce::MathConstants<float>::pi / 6.0f;
+        float px = x + r * std::cos(angle);
+        float py = y + r * std::sin(angle);
+        if (i == 0)
+            hex.startNewSubPath(px, py);
+        else
+            hex.lineTo(px, py);
+    }
+    hex.closeSubPath();
+    g.setColour(TapeColors::screw.darker(0.5f));
+    g.fillPath(hex);
+}
+
+static void drawBrushedMetalTexture(juce::Graphics& g, juce::Rectangle<float> bounds, juce::Colour baseColour)
+{
+    // Base color
+    g.setColour(baseColour);
+    g.fillRoundedRectangle(bounds, 12.0f);
+
+    // Subtle diagonal brush strokes
+    g.setColour(juce::Colours::white.withAlpha(0.03f));
+    for (float i = -bounds.getHeight(); i < bounds.getWidth() + bounds.getHeight(); i += 3.0f)
+    {
+        g.drawLine(bounds.getX() + i, bounds.getY(),
+                   bounds.getX() + i + bounds.getHeight(), bounds.getBottom(), 0.5f);
+    }
+
+    // Top highlight
+    juce::ColourGradient topHighlight(baseColour.brighter(0.15f), bounds.getX(), bounds.getY(),
+                                       baseColour, bounds.getX(), bounds.getY() + 30.0f, false);
+    g.setGradientFill(topHighlight);
+    g.fillRoundedRectangle(bounds.getX(), bounds.getY(), bounds.getWidth(), 30.0f, 12.0f);
 }
 
 //==============================================================================
@@ -107,68 +160,72 @@ void VUMeter::setLevel(float newLevel)
 
 void VUMeter::paint(juce::Graphics& g)
 {
-    auto bounds = getLocalBounds().toFloat().reduced(2);
+    auto bounds = getLocalBounds().toFloat();
 
-    // Background with vintage look
-    g.setColour(TapeColors::cream.darker(0.8f));
+    // Background (recessed look)
+    g.setColour(juce::Colour(0xff151515));
     g.fillRoundedRectangle(bounds, 4.0f);
 
-    // Inner recess
-    auto innerBounds = bounds.reduced(3);
-    g.setColour(juce::Colour(0xff0a0a08));
-    g.fillRoundedRectangle(innerBounds, 3.0f);
+    // Inner border for depth
+    g.setColour(juce::Colour(0xff0a0a0a));
+    g.fillRoundedRectangle(bounds.reduced(2), 3.0f);
 
     // Calculate level (convert to dB, then normalize)
     float db = juce::Decibels::gainToDecibels(level, -60.0f);
-    float normalized = juce::jmap(db, -40.0f, 3.0f, 0.0f, 1.0f);
+    float normalized = juce::jmap(db, -60.0f, 0.0f, 0.0f, 1.0f);
     normalized = juce::jlimit(0.0f, 1.0f, normalized);
 
-    // Level bar with gradient
-    float barWidth = innerBounds.getWidth() * normalized;
-    auto barBounds = innerBounds.removeFromLeft(barWidth).reduced(2);
+    // Segmented LED meter style (like PDLBRD)
+    const int numSegments = 16;
+    float segmentWidth = (bounds.getWidth() - 8) / numSegments;
+    float segmentHeight = bounds.getHeight() - 8;
+    float segmentGap = 2.0f;
 
-    if (barBounds.getWidth() > 0)
+    int litSegments = (int)(normalized * numSegments);
+
+    for (int i = 0; i < numSegments; ++i)
     {
-        // Green to yellow to red gradient
-        juce::Colour barColour;
-        if (normalized < 0.6f)
-            barColour = TapeColors::vuGreen;
-        else if (normalized < 0.85f)
-            barColour = TapeColors::vuYellow;
-        else
-            barColour = TapeColors::vuRed;
+        float segX = bounds.getX() + 4 + i * segmentWidth;
 
-        g.setColour(barColour);
-        g.fillRoundedRectangle(barBounds, 2.0f);
+        // Determine segment color
+        juce::Colour segColour;
+        if (i < 10)
+            segColour = TapeColors::vuGreen;
+        else if (i < 13)
+            segColour = TapeColors::vuYellow;
+        else
+            segColour = TapeColors::vuRed;
+
+        bool isLit = (i < litSegments);
+
+        if (isLit)
+        {
+            g.setColour(segColour);
+        }
+        else
+        {
+            g.setColour(segColour.withAlpha(0.15f));  // Dim unlit segments
+        }
+
+        g.fillRoundedRectangle(segX, bounds.getY() + 4, segmentWidth - segmentGap, segmentHeight, 2.0f);
     }
 
     // Peak indicator
     float peakDb = juce::Decibels::gainToDecibels(peakLevel, -60.0f);
-    float peakNormalized = juce::jmap(peakDb, -40.0f, 3.0f, 0.0f, 1.0f);
+    float peakNormalized = juce::jmap(peakDb, -60.0f, 0.0f, 0.0f, 1.0f);
     peakNormalized = juce::jlimit(0.0f, 1.0f, peakNormalized);
 
     if (peakNormalized > 0.01f)
     {
-        float peakX = bounds.getX() + 5 + (bounds.getWidth() - 10) * peakNormalized;
+        int peakSegment = (int)(peakNormalized * numSegments);
+        peakSegment = juce::jlimit(0, numSegments - 1, peakSegment);
+        float peakX = bounds.getX() + 4 + peakSegment * segmentWidth;
         g.setColour(TapeColors::cream);
-        g.fillRect(peakX - 1, bounds.getY() + 4, 2.0f, bounds.getHeight() - 8);
-    }
-
-    // VU scale markings
-    g.setColour(TapeColors::cream.withAlpha(0.5f));
-    g.setFont(juce::FontOptions(8.0f));
-
-    // -20, -10, -3, 0, +3 dB marks
-    float marks[] = { -20.0f, -10.0f, -3.0f, 0.0f, 3.0f };
-    for (float mark : marks)
-    {
-        float markNorm = juce::jmap(mark, -40.0f, 3.0f, 0.0f, 1.0f);
-        float markX = bounds.getX() + 5 + (bounds.getWidth() - 10) * markNorm;
-        g.drawLine(markX, bounds.getY() + 2, markX, bounds.getY() + 6, 1.0f);
+        g.fillRect(peakX + segmentWidth/2 - 1, bounds.getY() + 2, 2.0f, bounds.getHeight() - 4);
     }
 
     // Outer frame
-    g.setColour(TapeColors::gold.withAlpha(0.5f));
+    g.setColour(juce::Colour(0xff333333));
     g.drawRoundedRectangle(bounds, 4.0f, 1.0f);
 }
 
@@ -198,10 +255,14 @@ void TapeReel::timerCallback()
 
 void TapeReel::paint(juce::Graphics& g)
 {
-    auto bounds = getLocalBounds().toFloat().reduced(4);
+    auto bounds = getLocalBounds().toFloat().reduced(2);
     float cx = bounds.getCentreX();
     float cy = bounds.getCentreY();
     float outerRadius = juce::jmin(bounds.getWidth(), bounds.getHeight()) / 2.0f;
+
+    // Shadow under reel
+    g.setColour(juce::Colours::black.withAlpha(0.4f));
+    g.fillEllipse(cx - outerRadius + 3, cy - outerRadius + 3, outerRadius * 2.0f, outerRadius * 2.0f);
 
     // Tape (outer ring) - varies with imaginary tape amount
     float tapeRadius = outerRadius;
@@ -341,7 +402,7 @@ TapeWarmAudioProcessorEditor::TapeWarmAudioProcessorEditor(TapeWarmAudioProcesso
     machineTypeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "machineType", machineTypeBox);
     tapeTypeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "tapeType", tapeTypeBox);
 
-    setSize(600, 500);
+    setSize(600, 540);
     startTimerHz(30);
 }
 
@@ -368,19 +429,17 @@ void TapeWarmAudioProcessorEditor::setupKnob(juce::Slider& slider, juce::Label& 
 
 void TapeWarmAudioProcessorEditor::setupSecondarySlider(juce::Slider& slider, juce::Label& label, const juce::String& text)
 {
-    slider.setSliderStyle(juce::Slider::LinearHorizontal);
-    slider.setTextBoxStyle(juce::Slider::TextBoxRight, false, 50, 16);
+    // Use rotary knobs instead of linear sliders for larger, more usable controls
+    slider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag);
+    slider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 55, 14);
     slider.setColour(juce::Slider::textBoxTextColourId, TapeColors::cream);
     slider.setColour(juce::Slider::textBoxOutlineColourId, juce::Colours::transparentBlack);
-    slider.setColour(juce::Slider::trackColourId, TapeColors::gold);
-    slider.setColour(juce::Slider::thumbColourId, TapeColors::cream);
-    slider.setColour(juce::Slider::backgroundColourId, TapeColors::faceplate.darker(0.3f));
     addAndMakeVisible(slider);
 
     label.setText(text, juce::dontSendNotification);
-    label.setColour(juce::Label::textColourId, TapeColors::cream.withAlpha(0.8f));
-    label.setFont(juce::FontOptions(9.0f));
-    label.setJustificationType(juce::Justification::centredLeft);
+    label.setColour(juce::Label::textColourId, TapeColors::cream.withAlpha(0.85f));
+    label.setFont(juce::FontOptions(10.0f).withStyle("Bold"));
+    label.setJustificationType(juce::Justification::centred);
     addAndMakeVisible(label);
 }
 
@@ -402,86 +461,71 @@ void TapeWarmAudioProcessorEditor::paint(juce::Graphics& g)
     // Main background
     g.fillAll(TapeColors::background);
 
-    // Faceplate area
-    auto faceplateArea = getLocalBounds().reduced(10);
-    g.setColour(TapeColors::faceplate);
-    g.fillRoundedRectangle(faceplateArea.toFloat(), 8.0f);
+    // Faceplate area with brushed metal texture (matching PDLBRD style)
+    auto faceplateArea = getLocalBounds().reduced(8).toFloat();
+    drawBrushedMetalTexture(g, faceplateArea, TapeColors::faceplate);
 
-    // Brushed metal effect
-    g.setColour(juce::Colours::white.withAlpha(0.02f));
-    for (int i = 0; i < faceplateArea.getHeight(); i += 2)
-    {
-        g.drawHorizontalLine(faceplateArea.getY() + i, (float)faceplateArea.getX(), (float)faceplateArea.getRight());
-    }
+    // Beveled edge effect
+    g.setColour(TapeColors::faceplate.brighter(0.2f));
+    g.drawRoundedRectangle(faceplateArea, 12.0f, 2.0f);
+    g.setColour(TapeColors::faceplate.darker(0.3f));
+    g.drawRoundedRectangle(faceplateArea.reduced(2), 10.0f, 1.0f);
 
-    // Bevel effect
-    g.setColour(TapeColors::metalLight.withAlpha(0.3f));
-    g.drawRoundedRectangle(faceplateArea.toFloat(), 8.0f, 1.0f);
-    g.setColour(TapeColors::metalDark.withAlpha(0.5f));
-    g.drawRoundedRectangle(faceplateArea.reduced(1).toFloat(), 7.0f, 1.0f);
-
-    // Title
-    g.setColour(TapeColors::gold);
-    g.setFont(juce::FontOptions(28.0f).withStyle("Bold"));
-    g.drawText("TAPEWARM", 0, 20, getWidth(), 35, juce::Justification::centred);
+    // Title with slight emboss effect
+    g.setColour(juce::Colour(0xff111111));
+    g.setFont(juce::FontOptions(26.0f).withStyle("Bold"));
+    g.drawText("TAPEWARM", 1, 21, getWidth(), 30, juce::Justification::centred);
+    g.setColour(juce::Colours::white);
+    g.drawText("TAPEWARM", 0, 20, getWidth(), 30, juce::Justification::centred);
 
     // Subtitle
-    g.setColour(TapeColors::cream.withAlpha(0.7f));
-    g.setFont(juce::FontOptions(11.0f));
-    g.drawText("ANALOG TAPE EMULATION", 0, 48, getWidth(), 16, juce::Justification::centred);
+    g.setColour(TapeColors::cream.withAlpha(0.6f));
+    g.setFont(juce::FontOptions(10.0f));
+    g.drawText("ANALOG TAPE EMULATION", 0, 46, getWidth(), 14, juce::Justification::centred);
 
-    // VU meter labels
-    g.setColour(TapeColors::cream);
-    g.setFont(juce::FontOptions(9.0f).withStyle("Bold"));
-    g.drawText("IN", 175, 72, 30, 14, juce::Justification::centred);
-    g.drawText("OUT", 395, 72, 30, 14, juce::Justification::centred);
+    // VU meter labels (above the meters)
+    g.setColour(TapeColors::cream.withAlpha(0.9f));
+    g.setFont(juce::FontOptions(10.0f).withStyle("Bold"));
+    g.drawText("INPUT", 170, 63, 80, 14, juce::Justification::centred);
+    g.drawText("OUTPUT", 350, 63, 80, 14, juce::Justification::centred);
 
-    // Decorative screws in corners
-    auto drawScrew = [&g](float x, float y) {
-        g.setColour(TapeColors::metalDark);
-        g.fillEllipse(x - 6, y - 6, 12, 12);
-        g.setColour(TapeColors::metalLight);
-        g.fillEllipse(x - 5, y - 5, 10, 10);
-        g.setColour(TapeColors::metalDark);
-        g.drawLine(x - 3, y, x + 3, y, 1.5f);
-        g.drawLine(x, y - 3, x, y + 3, 1.5f);
-    };
-
-    drawScrew(25, 25);
-    drawScrew(getWidth() - 25.0f, 25);
-    drawScrew(25, getHeight() - 25.0f);
-    drawScrew(getWidth() - 25.0f, getHeight() - 25.0f);
+    // Corner screws (matching PDLBRD style)
+    float screwSize = 12.0f;
+    drawScrew(g, 22, 22, screwSize);
+    drawScrew(g, getWidth() - 22.0f, 22, screwSize);
+    drawScrew(g, 22, getHeight() - 22.0f, screwSize);
+    drawScrew(g, getWidth() - 22.0f, getHeight() - 22.0f, screwSize);
 
     // Divider line above secondary controls
-    g.setColour(TapeColors::gold.withAlpha(0.3f));
-    g.drawHorizontalLine(395, 30, getWidth() - 30.0f);
+    g.setColour(TapeColors::cream.withAlpha(0.15f));
+    g.drawHorizontalLine(405, 25, getWidth() - 25.0f);
 }
 
 void TapeWarmAudioProcessorEditor::resized()
 {
-    // Tape reels - top section
-    int reelSize = 80;
-    int reelY = 70;
-    leftReel.setBounds(50, reelY, reelSize, reelSize);
-    rightReel.setBounds(getWidth() - 50 - reelSize, reelY, reelSize, reelSize);
+    // Tape reels - top section (slightly smaller to make room for meters)
+    int reelSize = 70;
+    int reelY = 65;
+    leftReel.setBounds(35, reelY, reelSize, reelSize);
+    rightReel.setBounds(getWidth() - 35 - reelSize, reelY, reelSize, reelSize);
 
-    // VU Meters between reels
-    int meterWidth = 150;
-    int meterHeight = 22;
-    inputMeter.setBounds(145, 86, meterWidth, meterHeight);
-    outputMeter.setBounds(305, 86, meterWidth, meterHeight);
+    // VU Meters between reels - SIGNIFICANTLY LARGER
+    int meterWidth = 160;
+    int meterHeight = 32;
+    inputMeter.setBounds(130, 78, meterWidth, meterHeight);
+    outputMeter.setBounds(310, 78, meterWidth, meterHeight);
 
     // Type selectors
     int selectorWidth = 130;
-    machineLabel.setBounds(145, 115, selectorWidth, 14);
-    machineTypeBox.setBounds(145, 130, selectorWidth, 24);
+    machineLabel.setBounds(145, 118, selectorWidth, 14);
+    machineTypeBox.setBounds(145, 133, selectorWidth, 24);
 
-    tapeLabel.setBounds(305, 115, selectorWidth, 14);
-    tapeTypeBox.setBounds(305, 130, selectorWidth, 24);
+    tapeLabel.setBounds(310, 118, selectorWidth, 14);
+    tapeTypeBox.setBounds(310, 133, selectorWidth, 24);
 
-    // Main knobs - Row 1
-    int knobSize = 70;
-    int knobY1 = 170;
+    // Main knobs - Row 1 (larger knobs)
+    int knobSize = 75;
+    int knobY1 = 168;
     int knobSpacing = 140;
     int startX = 35;
 
@@ -512,25 +556,21 @@ void TapeWarmAudioProcessorEditor::resized()
     outputLabel.setBounds(startX + knobSpacing * 3, knobY2, knobSize, 14);
     outputKnob.setBounds(startX + knobSpacing * 3, knobY2 + 14, knobSize, knobSize);
 
-    // Secondary controls - bottom row (2x2 layout for better spacing)
-    int sliderY1 = 405;
-    int sliderY2 = 435;
-    int sliderWidth = 90;
-    int sliderHeight = 20;
-    int labelWidth = 55;
-    int columnSpacing = 280;
+    // Secondary controls - bottom row as LARGER rotary knobs (4 across)
+    int secKnobSize = 65;
+    int secKnobY = 415;
+    int secKnobSpacing = 140;
+    int secStartX = 35;
 
-    // Left column
-    bumpFreqLabel.setBounds(30, sliderY1, labelWidth, 16);
-    bumpFreqSlider.setBounds(30 + labelWidth, sliderY1, sliderWidth, sliderHeight);
+    mixLabel.setBounds(secStartX, secKnobY, secKnobSize, 14);
+    mixSlider.setBounds(secStartX, secKnobY + 14, secKnobSize, secKnobSize);
 
-    ageLabel.setBounds(30, sliderY2, labelWidth, 16);
-    ageSlider.setBounds(30 + labelWidth, sliderY2, sliderWidth, sliderHeight);
+    biasLabel.setBounds(secStartX + secKnobSpacing, secKnobY, secKnobSize, 14);
+    biasSlider.setBounds(secStartX + secKnobSpacing, secKnobY + 14, secKnobSize, secKnobSize);
 
-    // Right column
-    mixLabel.setBounds(30 + columnSpacing, sliderY1, labelWidth, 16);
-    mixSlider.setBounds(30 + columnSpacing + labelWidth, sliderY1, sliderWidth, sliderHeight);
+    ageLabel.setBounds(secStartX + secKnobSpacing * 2, secKnobY, secKnobSize, 14);
+    ageSlider.setBounds(secStartX + secKnobSpacing * 2, secKnobY + 14, secKnobSize, secKnobSize);
 
-    biasLabel.setBounds(30 + columnSpacing, sliderY2, labelWidth, 16);
-    biasSlider.setBounds(30 + columnSpacing + labelWidth, sliderY2, sliderWidth, sliderHeight);
+    bumpFreqLabel.setBounds(secStartX + secKnobSpacing * 3, secKnobY, secKnobSize, 14);
+    bumpFreqSlider.setBounds(secStartX + secKnobSpacing * 3, secKnobY + 14, secKnobSize, secKnobSize);
 }
