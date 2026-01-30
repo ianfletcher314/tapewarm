@@ -5,4 +5,4 @@
 
 */
 
-#include "include_juce_gui_extra.cpp"
+#include <juce_gui_extra/juce_gui_extra.mm>

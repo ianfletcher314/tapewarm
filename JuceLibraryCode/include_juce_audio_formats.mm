@@ -5,4 +5,4 @@
 
 */
 
-#include "include_juce_audio_formats.cpp"
+#include <juce_audio_formats/juce_audio_formats.mm>

@@ -5,4 +5,4 @@
 
 */
 
-#include "include_juce_audio_plugin_client_VST3.cpp"
+#include <juce_audio_plugin_client/juce_audio_plugin_client_VST3.mm>

@@ -5,4 +5,4 @@
 
 */
 
-#include "include_juce_dsp.cpp"
+#include <juce_dsp/juce_dsp.mm>

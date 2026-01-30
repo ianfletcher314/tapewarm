@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="TPWRM01" name="TapeWarm" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1"
-              companyName="Compstortion" companyCopyright="2025"
-              companyWebsite="https://github.com/ianfletcher314/tapewarm"
-              pluginFormats="buildAU,buildVST3"
-              pluginCharacteristicsValue=""
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Compstortion"
+              companyCopyright="2025" companyWebsite="https://github.com/ianfletcher314/tapewarm"
+              pluginFormats="buildAU,buildVST3" pluginCharacteristicsValue=""
               pluginName="TapeWarm" pluginDesc="Analog tape emulation plugin"
               pluginManufacturer="Compstortion" pluginManufacturerCode="Cmps"
-              pluginCode="Tpwm" pluginVST3Category="Fx"
-              pluginAUMainType="'aufx'">
+              pluginCode="Tpwm" pluginVST3Category="Fx" pluginAUMainType="'aufx'">
   <MAINGROUP id="MAINGRP" name="TapeWarm">
     <GROUP id="SOURCE" name="Source">
       <FILE id="PROCSR" name="PluginProcessor.cpp" compile="1" resource="0"
@@ -18,15 +15,12 @@
             file="Source/PluginProcessor.h"/>
       <FILE id="EDITOR" name="PluginEditor.cpp" compile="1" resource="0"
             file="Source/PluginEditor.cpp"/>
-      <FILE id="EDITORH" name="PluginEditor.h" compile="0" resource="0"
-            file="Source/PluginEditor.h"/>
+      <FILE id="EDITORH" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
       <GROUP id="DSP" name="DSP">
-        <FILE id="DSPUTILS" name="DSPUtils.h" compile="0" resource="0"
-              file="Source/DSP/DSPUtils.h"/>
+        <FILE id="DSPUTILS" name="DSPUtils.h" compile="0" resource="0" file="Source/DSP/DSPUtils.h"/>
         <FILE id="TAPECPP" name="TapeProcessor.cpp" compile="1" resource="0"
               file="Source/DSP/TapeProcessor.cpp"/>
-        <FILE id="TAPEH" name="TapeProcessor.h" compile="0" resource="0"
-              file="Source/DSP/TapeProcessor.h"/>
+        <FILE id="TAPEH" name="TapeProcessor.h" compile="0" resource="0" file="Source/DSP/TapeProcessor.h"/>
       </GROUP>
     </GROUP>
   </MAINGROUP>
@@ -51,6 +45,7 @@
         <MODULEPATH id="juce_graphics" path="/Users/ianfletcher/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="/Users/ianfletcher/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="/Users/ianfletcher/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors_headless" path="../JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>
@@ -58,8 +53,11 @@
     <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
-    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
     <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_audio_processors_headless" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="1"/>
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>

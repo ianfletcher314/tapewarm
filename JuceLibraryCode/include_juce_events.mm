@@ -5,4 +5,4 @@
 
 */
 
-#include "include_juce_events.cpp"
+#include <juce_events/juce_events.mm>

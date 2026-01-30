@@ -5,4 +5,4 @@
 
 */
 
-#include "include_juce_graphics.cpp"
+#include <juce_graphics/juce_graphics.mm>
