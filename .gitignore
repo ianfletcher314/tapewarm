@@ -1,0 +1,53 @@
+# Build directories
+Builds/MacOSX/build/
+Builds/MacOSX/*.xcuserdata/
+Builds/MacOSX/xcshareddata/
+*.xcworkspace/
+
+# IDE files
+*.xcuserdata
+.vs/
+*.user
+
+# Compiled files
+*.o
+*.obj
+*.a
+*.lib
+*.dylib
+*.so
+
+# Plugin outputs
+*.component
+*.vst3
+*.vst
+*.aax
+*.au
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
