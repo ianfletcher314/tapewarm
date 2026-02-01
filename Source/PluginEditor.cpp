@@ -114,10 +114,13 @@ void TapeWarmLookAndFeel::drawRotarySlider(juce::Graphics& g, int x, int y, int 
     g.setGradientFill(capGrad);
     g.fillEllipse(cx - capRadius, cy - capRadius, capRadius * 2.0f, capRadius * 2.0f);
 
-    // Pointer line (7 o'clock to 5 o'clock range)
-    float indicatorAngle = juce::jmap(sliderPosProportional, 0.0f, 1.0f,
-                                       juce::MathConstants<float>::pi * 1.25f,
-                                       juce::MathConstants<float>::pi * 2.75f);
+    // Pointer line (7 o'clock to 5 o'clock range, rotating clockwise)
+    // 7 o'clock = 210 degrees = 7*pi/6 radians from positive x-axis
+    // 5 o'clock = 330 degrees = 11*pi/6 radians, but we go through 360 degrees
+    // So we map from 7*pi/6 (~3.67) to 11*pi/6 + 2*pi (~11.52) for clockwise rotation
+    const float startAngle = juce::MathConstants<float>::pi * 0.75f;   // 135 degrees (7 o'clock in screen coords where y increases downward)
+    const float endAngle = juce::MathConstants<float>::pi * 2.25f;     // 405 degrees (5 o'clock, going clockwise through bottom)
+    float indicatorAngle = juce::jmap(sliderPosProportional, 0.0f, 1.0f, startAngle, endAngle);
 
     float pointerLength = radius * 0.75f;
     float ix1 = cx + (radius * 0.15f) * std::cos(indicatorAngle);
@@ -402,6 +405,11 @@ TapeWarmAudioProcessorEditor::TapeWarmAudioProcessorEditor(TapeWarmAudioProcesso
     machineTypeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "machineType", machineTypeBox);
     tapeTypeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(apvts, "tapeType", tapeTypeBox);
 
+    // Load background image
+    juce::File imageFile("/Users/ianfletcher/tapewarm/Source/background.png");
+    if (imageFile.existsAsFile())
+        backgroundImage = juce::ImageFileFormat::loadFrom(imageFile);
+
     setSize(600, 540);
     startTimerHz(30);
 }
@@ -463,7 +471,57 @@ void TapeWarmAudioProcessorEditor::paint(juce::Graphics& g)
 
     // Faceplate area with brushed metal texture (matching PDLBRD style)
     auto faceplateArea = getLocalBounds().reduced(8).toFloat();
-    drawBrushedMetalTexture(g, faceplateArea, TapeColors::faceplate);
+
+    // Draw background image if available, otherwise fall back to brushed metal
+    if (backgroundImage.isValid())
+    {
+        // Draw image scaled to fit, with dark overlay for readability
+        g.saveState();
+
+        // Clip to rounded rectangle
+        juce::Path clipPath;
+        clipPath.addRoundedRectangle(faceplateArea, 12.0f);
+        g.reduceClipRegion(clipPath);
+
+        // Calculate source rectangle for proper cropping
+        float imgW = (float)backgroundImage.getWidth();
+        float imgH = (float)backgroundImage.getHeight();
+        float destAspect = faceplateArea.getWidth() / faceplateArea.getHeight();
+        float srcAspect = imgW / imgH;
+
+        juce::Rectangle<float> srcRect;
+        if (srcAspect > destAspect)
+        {
+            // Image is wider - crop sides
+            float srcW = imgH * destAspect;
+            float srcX = (imgW - srcW) / 2.0f;
+            srcRect = juce::Rectangle<float>(srcX, 0, srcW, imgH);
+        }
+        else
+        {
+            // Image is taller - crop top/bottom
+            float srcH = imgW / destAspect;
+            float srcY = (imgH - srcH) * 0.3f;  // Shift up slightly
+            srcRect = juce::Rectangle<float>(0, srcY, imgW, srcH);
+        }
+
+        g.drawImage(backgroundImage,
+                    faceplateArea.getX(), faceplateArea.getY(),
+                    faceplateArea.getWidth(), faceplateArea.getHeight(),
+                    (int)srcRect.getX(), (int)srcRect.getY(),
+                    (int)srcRect.getWidth(), (int)srcRect.getHeight());
+
+        // Dark overlay for contrast (semi-transparent) - use faceplate color for warmth
+        g.setColour(TapeColors::faceplate.withAlpha(0.75f));
+        g.fillRect(faceplateArea);
+
+        g.restoreState();
+    }
+    else
+    {
+        // Fallback to brushed metal texture
+        drawBrushedMetalTexture(g, faceplateArea, TapeColors::faceplate);
+    }
 
     // Beveled edge effect
     g.setColour(TapeColors::faceplate.brighter(0.2f));

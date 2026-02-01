@@ -70,6 +70,9 @@ private:
     // Custom look and feel
     TapeWarmLookAndFeel lookAndFeel;
 
+    // Background image
+    juce::Image backgroundImage;
+
     // Tape reels
     TapeReel leftReel, rightReel;
 
